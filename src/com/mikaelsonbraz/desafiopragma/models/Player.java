@@ -9,6 +9,16 @@ public class Player {
     private int kills;
     private List<String> old_names;
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", kills=" + kills +
+                ", old_names=" + old_names +
+                '}';
+    }
+
     public Player() {
     }
 
