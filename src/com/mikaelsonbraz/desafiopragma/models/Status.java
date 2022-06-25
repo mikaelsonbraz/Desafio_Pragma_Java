@@ -30,4 +30,12 @@ public class Status {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "total_kills=" + total_kills +
+                ", players=" + players +
+                '}';
+    }
 }

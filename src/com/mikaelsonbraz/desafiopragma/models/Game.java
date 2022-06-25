@@ -28,4 +28,12 @@ public class Game {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", status=" + status +
+                '}';
+    }
 }

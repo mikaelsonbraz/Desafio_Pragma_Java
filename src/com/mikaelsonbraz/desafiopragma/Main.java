@@ -1,9 +1,5 @@
 package com.mikaelsonbraz.desafiopragma;
 
-import com.mikaelsonbraz.desafiopragma.models.Game;
-import com.mikaelsonbraz.desafiopragma.models.Player;
-import com.mikaelsonbraz.desafiopragma.models.Status;
-import com.mikaelsonbraz.desafiopragma.services.Reader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
