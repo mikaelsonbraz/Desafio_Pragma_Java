@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,15 +15,16 @@ public class Reader {
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new FileReader("src/com/mikaelsonbraz/desafiopragma/archives/teste.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("src/com/mikaelsonbraz/desafiopragma/archives/Quake.txt"));
         String linha;
         Reader reader = new Reader();
 
         while ((linha = br.readLine()) != null) {
-            List<String> itensList = reader.parserList(linha);
-            reader.organizer(itensList);
+            reader.organizer(linha);
         }
-        System.out.println(reader.gameList);
+        for (Game game : reader.gameList){
+            System.out.println(game);
+        }
 
     }
 
@@ -44,7 +44,7 @@ public class Reader {
     }
 
     private String findPlayerName(String nameSomewhere){
-        return nameSomewhere.split("\\\\t")[0].substring(2);
+        return nameSomewhere.split("\\\\t")[0];
     }
 
     private void setPlayerOldNames(Player player, String atualName){
@@ -70,32 +70,31 @@ public class Reader {
         }
     }
 
-    private List<String> parserList(String line){
-        return List.of(line.split(" "));
-    }
 
-    private void organizer(List<String> list){
-        if (Objects.equals(list.get(3), "InitGame:")){
+    private void organizer(String line){
+        List<String> list = List.of(line.strip().split(" "));
+        if (Objects.equals(list.get(1), "InitGame:")){
             game = new Game();
             game.setId(gameId);
             gameId += 1;
-        } else if (Objects.equals(list.get(3), "ClientUserinfoChanged:")){
-            int playerId = Integer.parseInt(list.get(4));
-            String playername = findPlayerName(list.get(5));
+        } else if (Objects.equals(list.get(1), "ClientUserinfoChanged:")){
+            int playerId = Integer.parseInt(list.get(2));
+            String playername = findPlayerName(line.strip().split(" n\\\\")[1]);
             if (findPlayerById(playerId) == null){
                 playersList.add(new Player(playerId, playername, 0, new ArrayList<>()));
             } else {
                 setPlayerOldNames(Objects.requireNonNull(findPlayerById(playerId)), playername);
             }
-        } else if (Objects.equals(list.get(3), "Kill:")){
+        } else if (Objects.equals(list.get(1), "Kill:")){
             status.setTotal_kills(status.getTotal_kills() + 1);
-            int idKill = Integer.parseInt(list.get(4));
-            int idKilled = Integer.parseInt(list.get(5));
+            int idKill = Integer.parseInt(list.get(2));
+            int idKilled = Integer.parseInt(list.get(3));
             mathKills(idKill, idKilled);
-        } else if (Objects.equals(list.get(3), "ShutdownGame:")){
+        } else if (Objects.equals(list.get(1), "ShutdownGame:")){
             game.setStatus(status);
             gameList.add(game);
+            playersList = new ArrayList<>();
+            status = new Status(0, playersList);
         }
     }
-
 }
