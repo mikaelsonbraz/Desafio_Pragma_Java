@@ -11,11 +11,11 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", kills=" + kills +
-                ", old_names=" + old_names +
+        return "{" +
+                "id: " + id +
+                ", nome: " + name + '\'' +
+                ", kills: " + kills +
+                ", old_names: " + old_names +
                 '}';
     }
 

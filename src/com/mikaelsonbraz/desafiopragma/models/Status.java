@@ -33,9 +33,9 @@ public class Status {
 
     @Override
     public String toString() {
-        return "Status{" +
-                "total_kills=" + total_kills +
-                ", players=" + players +
+        return "{" +
+                "total_kills: " + total_kills +
+                ", players: " + players +
                 '}';
     }
 }

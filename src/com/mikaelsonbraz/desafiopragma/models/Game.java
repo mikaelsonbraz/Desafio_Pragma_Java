@@ -31,9 +31,9 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", status=" + status +
+        return "{" +
+                "game: " + id +
+                ", status: " + status +
                 '}';
     }
 }
