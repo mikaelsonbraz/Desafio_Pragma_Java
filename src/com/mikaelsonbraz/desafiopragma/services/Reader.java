@@ -3,9 +3,11 @@ package com.mikaelsonbraz.desafiopragma.services;
 import com.mikaelsonbraz.desafiopragma.models.Game;
 import com.mikaelsonbraz.desafiopragma.models.Player;
 import com.mikaelsonbraz.desafiopragma.models.Status;
+import com.mikaelsonbraz.desafiopragma.org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,10 @@ public class Reader {
 
     public static void main(String[] args) throws IOException {
 
+        List<String> jsonList = new ArrayList<>();
+
+        FileWriter fileWriter = null;
+
         BufferedReader br = new BufferedReader(new FileReader("src/com/mikaelsonbraz/desafiopragma/archives/Quake.txt"));
         String linha;
         Reader reader = new Reader();
@@ -22,8 +28,18 @@ public class Reader {
         while ((linha = br.readLine()) != null) {
             reader.organizer(linha);
         }
+
         for (Game game : reader.gameList){
-            System.out.println(game);
+            JSONObject jsonObject = new JSONObject(game);
+            jsonList.add(jsonObject.toString(4));
+        }
+
+        try{
+            fileWriter = new FileWriter("src/com/mikaelsonbraz/desafiopragma/archives/saida.json");
+            fileWriter.write(jsonList.toString());
+            fileWriter.close();
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
     }
