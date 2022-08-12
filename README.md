@@ -3,7 +3,7 @@
 
 _____
 
-<h4>Desafio construído e superado utilizando a linguagem Java</h4>
+<h4>Desafio construído e superado utilizando a linguagem Java e usanndo o paradigma de OO</h4>
 
 _____
 
